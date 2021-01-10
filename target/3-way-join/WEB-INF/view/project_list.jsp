@@ -30,11 +30,8 @@
 					
 			<table>
 				<tr>
-					
 					<th>Name</th>
                                         <th>Action</th> 
-                                        
-					
 				</tr>
 				
 				<!-- loop over and print our customers -->
@@ -65,7 +62,7 @@
                                                         <a href="${deleteLink}"
                                                            onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
                                                         |
-                                                        <a href="${list}">List</a>
+                                                        <a href="${list}">View Users</a>
                                                 </td>
                                                			
 					</tr>

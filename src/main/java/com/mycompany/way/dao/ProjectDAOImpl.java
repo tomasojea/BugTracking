@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.way.dao;
 
 import com.mycompany.way.entities.Project;
 import com.mycompany.way.entities.Ticket;
 import com.mycompany.way.entities.User;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class ProjectDAOImpl implements ProjectDAO{
     
     @Autowired
-     private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public List<Project> getProjects() {
        
@@ -34,7 +30,6 @@ public class ProjectDAOImpl implements ProjectDAO{
         
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(theProjects);
-        
     }
 
     public Project getProject(int theId) {
@@ -43,7 +38,6 @@ public class ProjectDAOImpl implements ProjectDAO{
         Project theProject = currentSession.get(Project.class, theId);
 		
         return theProject;
-        
     }
 
     public void deleteProject(int theId) {
@@ -51,7 +45,6 @@ public class ProjectDAOImpl implements ProjectDAO{
         Session currentSession = sessionFactory.getCurrentSession();
         Query theQuery = currentSession.createQuery("delete from Project where id=:idProject");
         theQuery.setParameter("idProject", theId);
-
         theQuery.executeUpdate();
     }
 
@@ -68,12 +61,20 @@ public class ProjectDAOImpl implements ProjectDAO{
         
         Session currentSession = sessionFactory.getCurrentSession();
         Project tempProject = currentSession.get(Project.class,theId);
-        System.out.println(tempProject.getProjectname());
         List<Ticket> ticketlist = tempProject.getTickets();
-        System.out.println(ticketlist);
-        
+                
         return ticketlist;        
+    }
+
+    @Override
+    public void saveAssociation(Map<String,String> theIds) {
         
+        Session currentSession = sessionFactory.getCurrentSession();
+        int projectId = Integer.parseInt(theIds.get("project"));
+        int userId = Integer.parseInt(theIds.get("user"));
+        Project tempProject = currentSession.get(Project.class, projectId);
+        User tempUser = currentSession.get(User.class, userId);
+        tempUser.addProjects(tempProject);
     }
     
 }

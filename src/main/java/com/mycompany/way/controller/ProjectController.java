@@ -78,7 +78,8 @@ public class ProjectController {
 		
 		// get the customer from our service
 		List <Ticket> theTickets = projectService.getTickets(theId);
-		
+		Project theProject = projectService.getProject(theId);
+                theModel.addAttribute("projectName", theProject.getProjectname());
 		// set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("tickets", theTickets);
 		

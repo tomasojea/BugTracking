@@ -41,7 +41,7 @@ public class TicketController  {
              
 		theModel.addAttribute("tickets", theTickets);
 		
-		return "home";
+		return "ticket_list";
 	}
         
     @GetMapping("/delete")    
@@ -52,27 +52,7 @@ public class TicketController  {
                 return "home";
         }
         
-     @Transactional
-     @GetMapping("/list2")
-	public String listTickets2(Model theModel) {
-                SessionFactory sessionFactory = new Configuration()
-                                    .configure("hibernate.cfg.xml")
-                                    .addAnnotatedClass(Ticket.class)
-                                    .addAnnotatedClass(Project.class)
-                                    .addAnnotatedClass(Bug.class)
-                                    .addAnnotatedClass(User.class)
-                                    .buildSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
-                session.beginTransaction();
-                Project tempProject = session.get(Project.class, 8);
-                List<Ticket> ticketlist = tempProject.getTickets();
-                System.out.println(ticketlist);// when do sysout it calls the trough lazy loading 
-                session.getTransaction().commit();
-		
-		theModel.addAttribute("tickets", ticketlist);
-		
-		return "home_ticket";
-	}
+     
         
         @Transactional
         @GetMapping("/showFormForAdd")
@@ -86,29 +66,7 @@ public class TicketController  {
 		return "project-form";
 	}
         
-	@Transactional
-	@PostMapping("/saveProject")
-	public String saveProject(@ModelAttribute("Project") Project theProject) {
-		
-		
-		// get current hibernate session
-		SessionFactory sessionFactory = new Configuration()
-                                    .configure("hibernate.cfg.xml")
-                                    .addAnnotatedClass(Ticket.class)
-                                    .addAnnotatedClass(Project.class)
-                                    .addAnnotatedClass(Bug.class)
-                                    .addAnnotatedClass(User.class)
-                                    .buildSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
-                session.beginTransaction();
-		
-		// save/upate the project 
-		session.saveOrUpdate(theProject);
-                session.getTransaction().commit();
-
-		
-		return "redirect:/ticket/list2";
-	}
+	
         
         @Transactional
         @GetMapping("/showFormForAddUser")
@@ -122,30 +80,7 @@ public class TicketController  {
 		return "user-form";
 	}
         
-	@Transactional
-	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("User") User theUser) {
-		
-		
-		// get current hibernate session
-		SessionFactory sessionFactory = new Configuration()
-                                    .configure("hibernate.cfg.xml")
-                                    .addAnnotatedClass(Ticket.class)
-                                    .addAnnotatedClass(Project.class)
-                                    .addAnnotatedClass(Bug.class)
-                                    .addAnnotatedClass(User.class)
-                                    .buildSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
-                session.beginTransaction();
-		
-		// save/upate the project 
-		session.saveOrUpdate(theUser);
-                session.getTransaction().commit();
-
-		
-		return "redirect:/ticket/list2";
-	}
-        
+	
         @GetMapping("/assignment")
 	public String showFormAssignment(Model theModel) {
 		
@@ -177,9 +112,11 @@ public class TicketController  {
         @PostMapping("/saveTicket")
 	public String saveTicket(@RequestParam Map<String,String> theIds){
                       System.out.println(theIds.keySet());  
-                      System.out.println(theIds.values());  
+                      System.out.println(theIds.values()); 
+                      //////////////////////////////////////////////////////////////
                       int projectId = Integer.parseInt(theIds.get("project"));
                       int userId = Integer.parseInt(theIds.get("user"));
+                      //////////////////////////////////////////////////////////////
                       
                       SessionFactory sessionFactory = new Configuration()
                                     .configure("hibernate.cfg.xml")
@@ -190,11 +127,13 @@ public class TicketController  {
                                     .buildSessionFactory();
                       Session session = sessionFactory.getCurrentSession();
                       session.beginTransaction();
-                      Project tempProject = session.get(Project.class, projectId);
                       
+                     ////////////////////////////////////////////////////////////// 
+                      Project tempProject = session.get(Project.class, projectId);
                       User tempUser = session.get(User.class, userId);
                       tempUser.addProjects(tempProject);
-		      
+		      //////////////////////////////////////////////////////////////
+                      
 		      session.getTransaction().commit();
 		
 		return "redirect:/bug/list";

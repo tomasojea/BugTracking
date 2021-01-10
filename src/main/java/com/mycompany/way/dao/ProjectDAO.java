@@ -4,6 +4,7 @@ import com.mycompany.way.entities.Project;
 import com.mycompany.way.entities.Ticket;
 import com.mycompany.way.entities.User;
 import java.util.List;
+import java.util.Map;
 
 
 public interface ProjectDAO {
@@ -19,6 +20,8 @@ public interface ProjectDAO {
      public List<User> getUsers(int theId);
      
      public List<Ticket> getTickets(int theId);
+     
+     public void saveAssociation(Map<String,String> theIds);
      
   
 }

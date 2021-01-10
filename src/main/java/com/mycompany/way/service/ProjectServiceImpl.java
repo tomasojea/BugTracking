@@ -6,6 +6,7 @@ import com.mycompany.way.entities.Project;
 import com.mycompany.way.entities.Ticket;
 import com.mycompany.way.entities.User;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +21,16 @@ public class ProjectServiceImpl implements ProjectService{
     public List<Project> getProjects() {
          return projectDAO.getProjects();
     }
-    
-    @Transactional
+        @Transactional
     public void saveProject(Project theProject) {
         projectDAO.saveProjects(theProject);
     }
+    
     @Transactional
     public Project getProject(int theId) {
         return projectDAO.getProject(theId);
     }
+    
     @Transactional
     public void deleteProject(int theId) {
         projectDAO.deleteProject(theId);
@@ -42,6 +44,11 @@ public class ProjectServiceImpl implements ProjectService{
     @Transactional
     public List<Ticket> getTickets(int theId) {
        return projectDAO.getTickets(theId);
+    }
+
+    @Override
+    public void saveAssociation(Map<String, String> theIds) {
+        projectDAO.saveAssociation(theIds);
     }
     
 }
