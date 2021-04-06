@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>List Projects</title>
+	<title>List Users</title>
 	
 	<!-- reference our style sheet -->
 
@@ -19,7 +19,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2> Project's tickets</h2>
+			<h2> Project's users</h2>
 		</div>
 	</div>
 	
@@ -33,7 +33,6 @@
 					
 					<th>Name</th>
                                         <th>Action</th> 
-                                        
 					
 				</tr>
 				
@@ -60,10 +59,8 @@
                                                 </td>
                                                			
 					</tr>
-                                        
-                                                
-                                       
-				         
+                                                                                       
+                                     				         
 				</c:forEach>
 						
 			</table>

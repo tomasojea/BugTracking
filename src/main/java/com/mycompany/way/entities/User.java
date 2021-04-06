@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,16 +23,21 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="idUser")
     private int idUser;
-    @Column(name="name")
-    private String name;
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Ticket> tickets;
+    @Column(name="firstname")
+    private String firstname;
+    @Column(name="lastname")
+    private String lastname;
+    @Column(name="username")
+    private String username;
+    @Column(name="adress")
+    private String adress;
+    @Column(name="city")
+    private String city;
+    @Column(name="country")
+    private String country;
+    @Column(name="postalcode")
+    private String postalcode;
     @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Ticket", 
-        joinColumns = { @JoinColumn(name = "iduser") }, 
-        inverseJoinColumns = { @JoinColumn(name = "idproject") }
-    )
     List<Project> projects;
   
 
@@ -45,40 +49,70 @@ public class User {
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-    public void add(Ticket tempTicket) {
-        if (tickets == null){ // check if the object is null for whatever reason  
-            tickets = new ArrayList(); // Instanciate the object
-            }   
-            tickets.add(tempTicket); // add tickets to the user list.
-            tempTicket.setUser(this); // associate the ticket object with the user.
         
-    }
-    
     public void addProjects(Project tempProject){
     
         if (projects == null){
             projects = new ArrayList();
         }
         projects.add(tempProject);
-        
-        
+                
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPostalcode() {
+        return postalcode;
+    }
+
+    public void setPostalcode(String postalcode) {
+        this.postalcode = postalcode;
     }
    
    

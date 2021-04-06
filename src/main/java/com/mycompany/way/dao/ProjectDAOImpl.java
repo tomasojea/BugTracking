@@ -71,10 +71,10 @@ public class ProjectDAOImpl implements ProjectDAO{
         
         Session currentSession = sessionFactory.getCurrentSession();
         int projectId = Integer.parseInt(theIds.get("project"));
-        int userId = Integer.parseInt(theIds.get("user"));
+        int ticketId = Integer.parseInt(theIds.get("ticket"));
         Project tempProject = currentSession.get(Project.class, projectId);
-        User tempUser = currentSession.get(User.class, userId);
-        tempUser.addProjects(tempProject);
+        Ticket tempTicket = currentSession.get(Ticket.class, ticketId);
+        tempProject.add(tempTicket);
     }
     
 }

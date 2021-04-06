@@ -10,10 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
 
 
 @Entity
@@ -26,18 +27,17 @@ public class Project {
     private int idproject;
     @Column(name="project_name")
     private String projectname;
-    @ManyToMany(mappedBy = "projects")
+    @OneToMany(mappedBy = "idproject")
+    private List<Ticket> tickets;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "Project_Users", 
+        joinColumns = { @JoinColumn(name = "idproject") }, 
+        inverseJoinColumns = { @JoinColumn(name = "iduser") }
+    )
     private List<User> users;
     
-//    @JoinTable(name="Ticket", 
-//    joinColumns={@JoinColumn(name="idProject")},
-//    inverseJoinColumns={@JoinColumn(name="idproject")}
-//    )
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    //@LazyCollection(LazyCollectionOption.FALSE)
-    private List<Ticket> tickets;
-    
-
+       
     public int getIdproject() {
         return idproject;
     }
@@ -67,7 +67,17 @@ public class Project {
             tickets = new ArrayList();
             }   
             tickets.add(tempTicket);
-            tempTicket.setProject(this);
+            tempTicket.setIdproject(this);
+        
+    }
+    
+    public void addUsers(User tempUser){
+    
+        if (users == null){
+            users = new ArrayList();
+        }
+        users.add(tempUser);
+        
         
     }
 

@@ -18,6 +18,7 @@
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/service/TicketService.java
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/controller/TicketController.java
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/entities/Bug.java
+/home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/entities/Wrapper1.java
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/controller/UserController.java
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/entities/Project.java
 /home/educacion/NetBeansProjects/3-way-join/src/main/java/com/mycompany/way/dao/TicketDAOImpl.java

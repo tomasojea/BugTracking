@@ -18,14 +18,10 @@ public class Ticket {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="idticket")
     private int idticket;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
-                          CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="idproject")
-    private Project project;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
                           CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="iduser")
-    private User user;
+    @JoinColumn(name="idproject")
+    private Project idproject;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
                           CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="idbug")
@@ -38,29 +34,21 @@ public class Ticket {
     public void setIdticket(int idticket) {
         this.idticket = idticket;
     }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+ 
     public Bug getBug() {
         return bug;
     }
 
     public void setBug(Bug bug) {
         this.bug = bug;
+    }
+
+    public Project getIdproject() {
+        return idproject;
+    }
+
+    public void setIdproject(Project idproject) {
+        this.idproject = idproject;
     }
     
 }

@@ -26,21 +26,21 @@
         </nav>
 
 	<div class="navbar navbar-light bg-light border rounded">
-		<span class="navbar-text ">Assign Users</span>
+		<span class="navbar-text ">Assign Tickets</span>
 	
-		<form:form action="saveTicket" modelAttribute="Ticket" method="POST">
+		<form:form action="/saveProject" modelAttribute="wrapper" method="POST">
                     <div class="form-group border rounded w-50">
                         <label class="navbar-text">Projects:</label>
-                        <form:select  path="project" cssClass="form-control form-control-sm">
+                        <form:select  path="projects" cssClass="form-control form-control-sm">
                             <form:option value="NONE"> --SELECT--</form:option>
-                            <form:options items="${project}" itemValue="idproject" itemLabel="projectname"></form:options>
+                            <form:options items="${projects}" itemValue="idproject" itemLabel="projectname"></form:options>
                         </form:select>  
                     </div>
                     <div class="form-group border rounded w-50">
                         <label class="navbar-text" >Users:</label>
-                        <form:select multiple="true" path="user" cssClass="form-control form-control-sm">
+                        <form:select multiple="true" path="tickets" cssClass="form-control form-control-sm">
                             <form:option value="NONE"> --SELECT--</form:option>
-                            <form:options items="${users}" itemValue="idUser" itemLabel="name" ></form:options>
+                            <form:options items="${tickets}" itemValue="idticket" itemLabel="idticket"></form:options>
                         </form:select>    
 		    </div>
 		 <input type="submit" value="Save" class="btn btn-primary" />

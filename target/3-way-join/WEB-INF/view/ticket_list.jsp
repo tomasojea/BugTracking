@@ -15,7 +15,7 @@
 
 	<div id="wrapper">
             <div id="header">
-                <h2> Tickets from ${projectName}</h2>
+                <h2> Tickets </h2>
             </div>
 	</div>
 	
@@ -24,12 +24,15 @@
 		<div id="content">
                     <table>
                         <tr>
-                            <th>User</th>
-                            <th>Action</th> 
+                            <th>ID</th>
+                            <th>Project</th>
+                            <th>Status</th> 
                         </tr>
                         <c:forEach var="tempTicket" items="${tickets}">
                             <tr>
-                                <td> ${tempTicket.user.name} </td>
+                                <td> ${tempTicket.idticket} </td>
+                                <td> ${tempTicket.idproject.projectname} </td>
+                                <td> ${tempTicket.bug.status} </td>
                             </tr>
                         </c:forEach>
                     </table>

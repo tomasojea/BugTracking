@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +29,8 @@ public class TicketController  {
     @Autowired
     private TicketService ticketservice;
     
-   @Autowired
-    private SessionFactory sessionFactory;
+//   @Autowired
+//    private SessionFactory sessionFactory;
     
     
     @GetMapping("/list")
@@ -95,16 +94,18 @@ public class TicketController  {
                                     .buildSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
                 session.beginTransaction();
+                //////////////////////////////////////////////////////////////
                 Ticket theWrap = new Ticket();
                 Query<Project> theQuery = session.createQuery("from Project",Project.class);
                 List<Project> theProjects = theQuery.getResultList();
                 Query<User> theQuery2 = session.createQuery("from User",User.class);
                 List<User> theUsers = theQuery2.getResultList();
-	        theModel.addAttribute("project", theProjects);
+	        theModel.addAttribute("projects", theProjects);
                 session.getTransaction().commit();
                 System.out.println(theUsers);
-		theModel.addAttribute("Ticket", theWrap);
+		theModel.addAttribute("Tickets", theWrap);
                 theModel.addAttribute("users", theUsers);
+                //////////////////////////////////////////////////////////////
 		
 		return "project-assign";
 	}  

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.way.controller;
 
 import com.mycompany.way.entities.User;
@@ -24,6 +20,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    
+    
     @GetMapping("/list")
         public String listUsers(Model theModel){
 
@@ -31,7 +29,7 @@ public class UserController {
 
             theModel.addAttribute("users", theUsers);
 
-            return "user_list";
+            return "user-list";
         }
     
     @GetMapping("/delete")    
@@ -50,7 +48,7 @@ public class UserController {
 		
 		theModel.addAttribute("user", theUser);
 		
-		return "user-form";
+		return "user";
 	}    
         
     @PostMapping("/saveUser")
@@ -73,6 +71,6 @@ public class UserController {
 		theModel.addAttribute("user", theUser);
 		
 		// send over to our form		
-		return "user-form";
+		return "user";
 	}
 }

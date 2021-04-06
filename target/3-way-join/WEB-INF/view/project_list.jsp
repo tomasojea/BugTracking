@@ -46,7 +46,7 @@
 						<c:param name="projectId" value="${tempProject.idproject}" />
 					</c:url>
                                         
-                                        <c:url var="list" value="/project/ticketList">
+                                        <c:url var="list" value="/project/userList">
 						<c:param name="projectId" value="${tempProject.idproject}" />
 					</c:url>
 
@@ -68,19 +68,13 @@
 					</tr>
                                         
                                                 
-                                       
-				         
+                                       				         
 				</c:forEach>
 						
 			</table>
 				
 		</div>
-            <table>
-                 <c:forEach var="tempUser" items="${projects.users}">
-                    <tr><td>${tempUser}<td/> <tr/> 
-                </c:forEach>     
-                 
-            </table>
+
 	</div>
 	
 
