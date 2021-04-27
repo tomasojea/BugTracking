@@ -7,16 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface ProjectService {
+public interface ProjectService extends HelperService<Project>{
     
-    public List<Project> getProjects();
-
-    public void saveProject(Project theProject);
-
-    public Project getProject(int theId);
-
-    public void deleteProject(int theId);
-    
+      
     public List<User> getUsers(int theId);
      
     public List<Ticket> getTickets(int theId);

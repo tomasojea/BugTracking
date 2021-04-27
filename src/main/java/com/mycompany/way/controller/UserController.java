@@ -2,7 +2,7 @@
 package com.mycompany.way.controller;
 
 import com.mycompany.way.entities.User;
-import com.mycompany.way.service.UserService;
+import com.mycompany.way.service.HelperService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     
     @Autowired
-    private UserService userService;
+    private HelperService<User> userService;
     
     
     
     @GetMapping("/list")
         public String listUsers(Model theModel){
 
-            List <User> theUsers = userService.getUsers();
+            List <User> theUsers = userService.getAll();
 
             theModel.addAttribute("users", theUsers);
 
@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping("/delete")    
         public String deleteTicket(@RequestParam("userId") int theId){
                 
-                userService.deleteUser(theId);
+                userService.delete(theId);
             
                 return "user_list";
         }
@@ -55,7 +55,7 @@ public class UserController {
 	public String saveUser(@ModelAttribute("user") User theUser) {
 		
 		// save the customer using our service
-		userService.saveUser(theUser);
+		userService.save(theUser);
 		
 		return "redirect:/user/list";
 	}
@@ -65,7 +65,7 @@ public class UserController {
 									Model theModel) {
 		
 		// get the customer from our service
-		User theUser = userService.getUser(theId);
+		User theUser = userService.get(theId);
 		
 		// set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("user", theUser);

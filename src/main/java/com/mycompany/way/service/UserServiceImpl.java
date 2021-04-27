@@ -15,28 +15,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements HelperService<User>{
     
     @Autowired
 	private UserDAO userDAO;
 
     @Transactional
-    public List<User> getUsers() {
+    public List<User> getAll() {
         return userDAO.getUsers();
     }
 
     @Transactional
-    public void saveUser(User theUser) {
+    public void save(User theUser) {
         userDAO.saveUsers(theUser);
     }
 
     @Transactional
-    public User getUser(int theId) {
+    public User get(int theId) {
         return userDAO.getUser(theId);
     }
 
     @Transactional
-    public void deleteUser(int theId) {
+    public void delete(int theId) {
         userDAO.deleteUser(theId);
     }
     

@@ -18,21 +18,21 @@ public class ProjectServiceImpl implements ProjectService{
 	private ProjectDAO projectDAO;
     
     @Transactional
-    public List<Project> getProjects() {
+    public List<Project> getAll() {
          return projectDAO.getProjects();
     }
         @Transactional
-    public void saveProject(Project theProject) {
+    public void save(Project theProject) {
         projectDAO.saveProjects(theProject);
     }
     
     @Transactional
-    public Project getProject(int theId) {
+    public Project get(int theId) {
         return projectDAO.getProject(theId);
     }
     
     @Transactional
-    public void deleteProject(int theId) {
+    public void delete(int theId) {
         projectDAO.deleteProject(theId);
     }
     

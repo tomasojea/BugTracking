@@ -5,9 +5,7 @@ import com.mycompany.way.entities.Bug;
 import com.mycompany.way.entities.Project;
 import com.mycompany.way.entities.Ticket;
 import com.mycompany.way.entities.User;
-import com.mycompany.way.service.TicketService;
-import com.mycompany.way.service.UserService;
-import com.mycompany.way.service.UserServiceImpl;
+import com.mycompany.way.service.HelperService;
 import java.util.List;
 import java.util.Map;
 import javax.transaction.Transactional;
@@ -27,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/ticket")
 public class TicketController  {
     @Autowired
-    private TicketService ticketservice;
+    private HelperService<Ticket> ticketservice;
     
 //   @Autowired
 //    private SessionFactory sessionFactory;
@@ -36,7 +34,7 @@ public class TicketController  {
     @GetMapping("/list")
 	public String listTickets(Model theModel) {
             
-                List<Ticket> theTickets = ticketservice.getTickets();
+                List<Ticket> theTickets = ticketservice.getAll();
              
 		theModel.addAttribute("tickets", theTickets);
 		
@@ -46,7 +44,7 @@ public class TicketController  {
     @GetMapping("/delete")    
         public String deleteTicket(@RequestParam("customerId") int theId){
                 
-                ticketservice.deleteTicket(theId);
+                ticketservice.delete(theId);
             
                 return "home";
         }

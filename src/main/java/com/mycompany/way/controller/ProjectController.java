@@ -4,9 +4,8 @@ import com.mycompany.way.entities.Project;
 import com.mycompany.way.entities.Ticket;
 import com.mycompany.way.entities.User;
 import com.mycompany.way.entities.Wrapper1;
+import com.mycompany.way.service.HelperService;
 import com.mycompany.way.service.ProjectService;
-import com.mycompany.way.service.TicketService;
-import com.mycompany.way.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +24,9 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
     
+       
     @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private TicketService ticketService;
+    private HelperService<Ticket> ticketService;
    
     @RequestMapping("/welcome")
     public String welcome() {
@@ -39,7 +36,7 @@ public class ProjectController {
     @GetMapping("/list")
         public String listProjects(Model theModel){
 
-            List <Project> theProjects = projectService.getProjects();
+            List <Project> theProjects = projectService.getAll();
 
             theModel.addAttribute("projects", theProjects);
 
@@ -49,7 +46,7 @@ public class ProjectController {
     @GetMapping("/delete")    
         public String deleteProject(@RequestParam("projectId") int theId){
                 
-                projectService.deleteProject(theId);
+                projectService.delete(theId);
             
                 return "redirect:/project/list";
         }
@@ -69,7 +66,7 @@ public class ProjectController {
 	public String saveProject(@ModelAttribute("project") Project theProject) {
 		
 		// save the customer using our service
-		projectService.saveProject(theProject);
+		projectService.save(theProject);
 		
 		return "redirect:/project/list";
 	}
@@ -79,7 +76,7 @@ public class ProjectController {
 									Model theModel) {
 		
 		// get the customer from our service
-		Project theProject = projectService.getProject(theId);
+		Project theProject = projectService.get(theId);
 		
 		// set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("project", theProject);
@@ -94,7 +91,7 @@ public class ProjectController {
 		
 		// get the customer from our service
 		List <Ticket> theTickets = projectService.getTickets(theId);
-		Project theProject = projectService.getProject(theId);
+		Project theProject = projectService.get(theId);
                 theModel.addAttribute("projectName", theProject.getProjectname());
 		// set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("tickets", theTickets);
@@ -124,8 +121,8 @@ public class ProjectController {
 		
 		// get the customer from our service
                 Wrapper1 theWrapper = new Wrapper1();
-		List <Ticket> theTickets = ticketService.getTickets();
-		List <Project> theProject = projectService.getProjects();
+		List <Ticket> theTickets = ticketService.getAll();
+		List <Project> theProject = projectService.getAll();
                 System.out.println(theProject.get(1));
                 theModel.addAttribute("projects", theProject);
 		theModel.addAttribute("tickets", theTickets);

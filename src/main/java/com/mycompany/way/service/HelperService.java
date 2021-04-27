@@ -12,13 +12,15 @@ import java.util.List;
  *
  * @author educacion
  */
-public interface TicketService {
+public interface HelperService<C> {
     
-    public List<Ticket> getTickets();
+    public List<C> getAll();
 
-    public void saveTicket(Ticket theTicket);
+    public void save(C type);
 
-    public Ticket getTicket(int theId);
+    public C get(int theId);
 
-    public void deleteTicket(int theId);
+    public void delete(int theId);
 }
+    
+

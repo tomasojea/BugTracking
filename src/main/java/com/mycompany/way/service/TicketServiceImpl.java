@@ -10,28 +10,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class TicketServiceImpl implements TicketService{
+public class TicketServiceImpl implements HelperService<Ticket>{
     
     @Autowired
 	private TicketDAO ticketDAO;
     
     @Transactional
-    public List<Ticket> getTickets() {
+    public List<Ticket> getAll() {
         return ticketDAO.getTickets();
     }
     
     @Transactional
-    public void saveTicket(Ticket theTicket) {
+    public void save(Ticket theTicket) {
         ticketDAO.saveTickets(theTicket);
     }
     
     @Transactional
-    public Ticket getTicket(int theId) {
+    public Ticket get(int theId) {
         return ticketDAO.getTicket(theId);
     }
     
     @Transactional
-    public void deleteTicket(int theId) {
+    public void delete(int theId) {
         ticketDAO.deleteTicket(theId);
     }
     
